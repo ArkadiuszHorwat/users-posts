@@ -31,6 +31,16 @@ const setPostsToUsers = async () => {
 
         user.posts = posts;
     });
+
+    return usersTab;
 }
 
-setPostsToUsers();
+const countPosts = async () => {
+    const users = await setPostsToUsers();
+
+    users.map(user => {
+        console.log(`${user.name} napisał(a) ${user.posts.length} postów.`);
+    });
+}
+
+countPosts();
