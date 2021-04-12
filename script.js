@@ -23,7 +23,7 @@ const setPostsToUsers = async () => {
     const postsTab = await getPosts();
 
     usersTab.map(user => {
-        let posts = [];
+        const posts = [];
 
         postsTab.map(post => {
             user.id === post.userId && posts.push(post);
@@ -46,4 +46,23 @@ const countPosts = async () => {
     return strList;
 }
 
-countPosts().then(response => console.log(response));
+const checkUniqTitles = async () => {
+    const posts = await getPosts();
+    const titles = [];
+    const duplicates = [];
+
+    posts.map(post => {
+        titles.push(post.title);
+    });
+
+    titles.sort();
+    let current = null;
+    for(let i = 0; i < titles.length; i++){
+        titles[i] != current ? current = titles[i] : duplicates.push(titles[i]);
+    }
+
+    return duplicates;
+}
+
+countPosts().then(response => console.log('ilość postów: ',response));
+checkUniqTitles().then(response => console.log('duplikaty: ', response));
