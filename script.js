@@ -37,10 +37,13 @@ const setPostsToUsers = async () => {
 
 const countPosts = async () => {
     const users = await setPostsToUsers();
+    const strList = [];
 
     users.map(user => {
-        console.log(`${user.name} napisał(a) ${user.posts.length} postów.`);
+        strList.push(`${user.name} napisał(a) ${user.posts.length} postów.`);
     });
+
+    return strList;
 }
 
-countPosts();
+countPosts().then(response => console.log(response));
