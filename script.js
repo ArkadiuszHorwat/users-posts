@@ -113,6 +113,12 @@ function convertToRad(deg) {
     return deg * (Math.PI/180);
 }
 
-countPosts().then(response => console.log('Ilość postów użytkowników: ',response));
-checkUniqTitles().then(response => console.log('Powtarzające się tytuły postów: ', response));
-findClosestUser().then(response => console.log('Użytkownicy mieszkający najbliżej siebie: ', response));
+module.exports = {
+    getData,
+    setPostsToUsers,
+    countPosts,
+    checkUniqTitles,
+    findClosestUser,
+    getDistance,
+    convertToRad
+};

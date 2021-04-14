@@ -1,0 +1,25 @@
+{
+  "name": "users-posts",
+  "version": "1.0.0",
+  "description": "Script created with JS using axios.",
+  "main": "script.js",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArkadiuszHorwat/users-posts.git"
+  },
+  "author": "Arkadiusz Horwat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArkadiuszHorwat/users-posts/issues"
+  },
+  "homepage": "https://github.com/ArkadiuszHorwat/users-posts#readme"
+}
