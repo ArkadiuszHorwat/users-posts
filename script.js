@@ -1,17 +1,10 @@
 const axios = require('axios');
 
-const getPosts = async () => {
-    try{
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        return response.data;
-    }catch(errors){
-        console.error(errors);
-    }
-}
+const URL = 'https://jsonplaceholder.typicode.com/';
 
-const getUsers = async () => {
+const getData = async endUrl => {
     try{
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+        const response = await axios.get(`${URL}${endUrl}`);
         return response.data;
     }catch(errors){
         console.error(errors);
@@ -19,8 +12,8 @@ const getUsers = async () => {
 }
 
 const setPostsToUsers = async () => {
-    const usersTab = await getUsers();
-    const postsTab = await getPosts();
+    const usersTab = await getData('users');
+    const postsTab = await getData('posts');
 
     usersTab.map(user => {
         const posts = [];
@@ -50,7 +43,7 @@ const countPosts = async () => {
 }
 
 const checkUniqTitles = async () => {
-    const posts = await getPosts();
+    const posts = await getData('posts');
     const titles = [];
     const duplicates = [];
 
@@ -68,7 +61,7 @@ const checkUniqTitles = async () => {
 }
 
 const findClosestUser = async () => {
-    const users = await getUsers();
+    const users = await getData('users');
     const usersDistances = [];
 
     users.map(user => {
@@ -95,6 +88,7 @@ const findClosestUser = async () => {
         });
         usersDistances.push((`${user.name} jest najbliżej użytkownika ${closestUser}. Oddaleni są od siebie o ${Math.round(minDistance)}km`));
     });
+
     return usersDistances;
 }
 
@@ -105,19 +99,19 @@ function getDistance(firstLat,firstLng,secondLat,secondLng) {
     const dLon = convertToRad(secondLng-firstLng);
 
     const a = 
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(convertToRad(firstLat)) * Math.cos(convertToRad(secondLat)) * 
-      Math.sin(dLon/2) * Math.sin(dLon/2);
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(convertToRad(firstLat)) * Math.cos(convertToRad(secondLat)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2);
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     const d = R * c;
 
     return d;
-  }
+}
   
-  function convertToRad(deg) {
+function convertToRad(deg) {
     return deg * (Math.PI/180);
-  }
+}
 
 countPosts().then(response => console.log('Ilość postów użytkowników: ',response));
 checkUniqTitles().then(response => console.log('Powtarzające się tytuły postów: ', response));
