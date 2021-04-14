@@ -69,6 +69,7 @@ const checkUniqTitles = async () => {
 
 const findClosestUser = async () => {
     const users = await getUsers();
+    const usersDistances = [];
 
     users.map(user => {
         const firstLat = user.address.geo.lat;
@@ -91,9 +92,10 @@ const findClosestUser = async () => {
                     closestUser = otherUser.name;
                 }
             }
-        })
-        console.log(`${user.name} jest najbliżej użytkownika ${closestUser}. Oddaleni są od siebie o ${Math.round(minDistance)}km`);
-    })
+        });
+        usersDistances.push((`${user.name} jest najbliżej użytkownika ${closestUser}. Oddaleni są od siebie o ${Math.round(minDistance)}km`));
+    });
+    return usersDistances;
 }
 
 //geo distance in km between two points
