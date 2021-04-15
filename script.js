@@ -31,12 +31,11 @@ const setPostsToUsers = async () => {
 const countPosts = async () => {
     const users = await setPostsToUsers();
     const strList = [];
-
+    
     users.map(user => {
-        if(user.posts.length){
+        if(user.hasOwnProperty('posts')){
             strList.push(`${user.name} napisał(a) ${user.posts.length} postów.`);
         }
-        else strList.push(`${user.name} nie napisał(a) żadnych postów.`)
     });
 
     return strList;
