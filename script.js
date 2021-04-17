@@ -15,10 +15,10 @@ const setPostsToUsers = async () => {
     const usersTab = await getData('users');
     const postsTab = await getData('posts');
 
-    usersTab.map(user => {
+    usersTab.forEach(user => {
         const posts = [];
 
-        postsTab.map(post => {
+        postsTab.forEach(post => {
             user.id === post.userId && posts.push(post);
         });
 
@@ -32,7 +32,7 @@ const countPosts = async () => {
     const users = await setPostsToUsers();
     const strList = [];
     
-    users.map(user => {
+    users.forEach(user => {
         if(user.hasOwnProperty('posts')){
             strList.push(`${user.name} napisał(a) ${user.posts.length} postów.`);
         }
@@ -46,7 +46,7 @@ const checkUniqTitles = async () => {
     const titles = [];
     const duplicates = [];
 
-    posts.map(post => {
+    posts.forEach(post => {
         titles.push(post.title);
     });
 
@@ -63,13 +63,13 @@ const findClosestUser = async () => {
     const users = await getData('users');
     const usersDistances = [];
 
-    users.map(user => {
+    users.forEach(user => {
         const firstLat = user.address.geo.lat;
         const firstLng = user.address.geo.lng;
         let minDistance = null;
         let closestUser;
 
-        users.map(otherUser => {
+        users.forEach(otherUser => {
             if(otherUser.id !== user.id){
                 const secondLat = otherUser.address.geo.lat;
                 const secondLng = otherUser.address.geo.lng;
